@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mem2Speech</string>
+    <string name="pen_description">Tap to toggle pen/eraser.</string>
+    <string name="image_from_gallery_description">tap to recognize text from image from your gallery</string>
+    <string name="settings_description">tap for settings</string>
+    <string name="clear_canvas_description">tap to clear canvas</string>
 </resources>

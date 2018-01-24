@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="#FFFFFFFF" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,9 +20,10 @@
         android:src="@drawable/ic_erase_24dp"
         android:onClick="clear"
         app:backgroundTint="#FFFFFF"
-        app:layout_anchorGravity="top|left|start" />
+        app:layout_anchorGravity="top|left|start"
+        android:contentDescription="@string/clear_canvas_description" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,9 +31,10 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_settings_black_24dp"
         app:backgroundTint="#FFFFFF"
-        app:layout_anchorGravity="top|right|end" />
+        app:layout_anchorGravity="top|right|end"
+        android:contentDescription="@string/settings_description" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/view_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,9 +42,10 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_collections_black_24dp"
         app:backgroundTint="#FFFFFF"
-        app:layout_anchorGravity="bottom|left|start" />
+        app:layout_anchorGravity="bottom|left|start"
+        android:contentDescription="@string/image_from_gallery_description" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +54,8 @@
         android:src="@drawable/ic_edit_black_24dp"
         android:onClick="switchTool"
         app:backgroundTint="#FFFFFF"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        android:contentDescription="@string/pen_description" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/recognize"

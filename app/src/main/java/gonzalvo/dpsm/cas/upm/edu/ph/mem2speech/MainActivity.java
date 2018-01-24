@@ -2,10 +2,10 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.canvas.DrawingView;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchTool(View view){
-        FloatingActionButton penButton = view.findViewById(R.id.write);
+        ImageView penButton = view.findViewById(R.id.write);
         drawingView.switchTool();
         if(isPen){
             penButton.setRotation(180);
