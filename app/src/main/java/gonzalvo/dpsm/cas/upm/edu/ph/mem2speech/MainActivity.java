@@ -1,11 +1,14 @@
 package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
 
 import gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.canvas.DrawingView;
 
@@ -58,6 +61,6 @@ public class MainActivity extends AppCompatActivity {
         drawingView.setDrawingCacheEnabled(true);
         drawingView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
-        new ToText(MainActivity.this).execute(drawingView.getDrawingCache());
+        new ToText(new WeakReferenceContextWrapper(new WeakReference<Context>(MainActivity.this))).execute(drawingView.getDrawingCache());
     }
 }

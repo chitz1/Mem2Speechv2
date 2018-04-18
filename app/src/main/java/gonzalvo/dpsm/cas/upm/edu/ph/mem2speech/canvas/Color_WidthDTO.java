@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Color_WidthDTO {
-    private Map<Path, Integer> colorsMap;
-    private Map<Path, Float> widthMap;
+    private final Map<Path, Integer> colorsMap;
+    private final Map<Path, Float> widthMap;
 
     Color_WidthDTO() {
-        this.colorsMap = new HashMap<Path, Integer>();
-        this.widthMap = new HashMap<Path, Float>();
+        this.colorsMap = new HashMap<>();
+        this.widthMap = new HashMap<>();
     }
 
     Integer getColor(Path path) {

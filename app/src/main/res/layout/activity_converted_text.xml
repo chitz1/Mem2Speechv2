@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.ConvertedTextActivity">
+    tools:contextReference="gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.ConvertedTextActivity">
 
     <TextView
         android:id="@+id/converted_text"

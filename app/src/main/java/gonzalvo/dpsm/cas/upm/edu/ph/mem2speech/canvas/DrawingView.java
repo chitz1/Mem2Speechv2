@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class DrawingView extends View {
     private Path path;
-    private Paint paint;
+    private final Paint paint;
     private float x, y;
     private final float STROKE_WIDTH = 10f;
     private float strokeWidth;
     private int selectedColor = Color.BLACK;
 
-    private Color_WidthDTO color_widthDTO;
-    private ArrayList<Path> paths;
+    private final Color_WidthDTO color_widthDTO;
+    private final ArrayList<Path> paths;
 
     public DrawingView(final Context context, final AttributeSet attributes) {
         super(context, attributes);
