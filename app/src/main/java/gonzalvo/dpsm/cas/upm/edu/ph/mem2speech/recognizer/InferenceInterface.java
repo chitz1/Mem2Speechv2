@@ -9,7 +9,7 @@ import java.util.List;
 
 class InferenceInterface {
 
-    private TensorFlowInferenceInterface inferenceInterface;
+    private final TensorFlowInferenceInterface inferenceInterface;
 
     InferenceInterface(AssetManager assetManager, String modelFilename){
         this.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);

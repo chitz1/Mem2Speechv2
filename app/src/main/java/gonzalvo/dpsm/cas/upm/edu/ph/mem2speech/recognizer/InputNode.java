@@ -5,21 +5,21 @@ class InputNode {
     private final float[] inputValue;
     private final long[] inputShape;
 
-    public InputNode(String inputName, float[] inputValue, long[] inputShape) {
+    InputNode(String inputName, float[] inputValue, long[] inputShape) {
         this.inputName = inputName;
         this.inputValue = inputValue;
         this.inputShape = inputShape;
     }
 
-    public String getInputName() {
+    String getInputName() {
         return inputName;
     }
 
-    public float[] getInputValue() {
+    float[] getInputValue() {
         return inputValue;
     }
 
-    public long[] getInputShape() {
+    long[] getInputShape() {
         return inputShape;
     }
 }

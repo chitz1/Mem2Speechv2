@@ -25,11 +25,6 @@ class ToSpeech extends AsyncTask<String, Void, Void> implements TextToSpeech.OnI
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
     protected Void doInBackground(String... params) {
         text = params[0];
         return null;
