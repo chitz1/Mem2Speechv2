@@ -11,10 +11,6 @@ class InferenceInterface {
 
     private TensorFlowInferenceInterface inferenceInterface;
 
-    static {
-        System.loadLibrary("tensorflow_inference");
-    }
-
     InferenceInterface(AssetManager assetManager, String modelFilename){
         this.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
     }

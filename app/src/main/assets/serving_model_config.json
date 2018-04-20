@@ -1,1 +1,16 @@
-{"input_shape": [1, 360, 360, 1], "input_name": ["features"], "output_names": ["output"]}
+{
+"input_nodes": [
+{
+"input_name": "features",
+"input_shape": [
+1,
+360,
+360,
+1
+]
+}
+],
+"output_names": [
+"output"
+]
+}

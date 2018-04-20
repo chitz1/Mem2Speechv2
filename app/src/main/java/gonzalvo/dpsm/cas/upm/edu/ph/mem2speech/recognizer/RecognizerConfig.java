@@ -11,15 +11,15 @@ public class RecognizerConfig {
         this.servingModelConfigFile = servingModelConfigFile;
     }
 
-    public String[] getCharset() {
+    String[] getCharset() {
         return charset;
     }
 
-    public int getImageSize() {
+    int getImageSize() {
         return imageSize;
     }
 
-    public String getServingModelConfigFilename() {
+    String getServingModelConfigFilename() {
         return servingModelConfigFile;
     }
 }
