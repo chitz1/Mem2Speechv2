@@ -4,8 +4,8 @@
 "input_name": "features",
 "input_shape": [
 1,
-360,
-360,
+64,
+2048,
 1
 ]
 }
