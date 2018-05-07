@@ -3,8 +3,6 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.recognizer;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,40 +54,12 @@ public class OfflineRecognizer implements Recognizer {
         return json;
     }
 
-    private float[] getFeaturesFrom(Bitmap bitmap) {
-        bitmap = resizeBitmap(bitmap);
-        bitmap = invertColors(bitmap);
-        int[] intValues = getPixelValuesFrom(bitmap);
-        float[] floatValues = new float[bitmap.getWidth() * bitmap.getHeight()];
-        for (int i = 0; i < intValues.length; ++i) {
-            final int val = intValues[i];
-            floatValues[i] = (((val >> 16) & 0xFF));
-        }
-        return floatValues;
-    }
-
-    private Bitmap invertColors(Bitmap bitmap) {
-        Bitmap outputImage = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputImage);
-        Paint invertedPaint = new Paint();
-        invertedPaint.setColorFilter(new ColorMatrixColorFilter(NEGATIVE));
-        canvas.drawBitmap(bitmap, 0, 0, invertedPaint);
-        return outputImage;
-    }
-
-    private static final float[] NEGATIVE = {
-            -1.0f,     0,     0,    0, 255, // red
-            0, -1.0f,     0,    0, 255, // green
-            0,     0, -1.0f,    0, 255, // blue
-            0,     0,     0, 1.0f,   0  // alpha
-    };
-
-    private Bitmap resizeBitmap(Bitmap bitmap) {
-        int maxWidth = config.getImageWidth();
+    private Bitmap resize(Bitmap image) {
         int maxHeight = config.getImageHeight();
+        int maxWidth = config.getImageWidth();
         if (maxHeight > 0 && maxWidth > 0) {
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
+            int width = image.getWidth();
+            int height = image.getHeight();
             float ratioBitmap = (float) width / (float) height;
             float ratioMax = (float) maxWidth / (float) maxHeight;
 
@@ -100,11 +70,15 @@ public class OfflineRecognizer implements Recognizer {
             } else {
                 finalHeight = (int) ((float)maxWidth / ratioBitmap);
             }
-            bitmap = Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
-            bitmap = finalWidth == maxWidth ? padBottom(bitmap, maxHeight) : padRight(bitmap, maxWidth);
-            return bitmap;
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            if (finalWidth == maxWidth) {
+                image = padBottom(image, maxHeight);
+            } else {
+                image = padRight(image, maxWidth);
+            }
+            return image;
         } else {
-            return bitmap;
+            return image;
         }
     }
 
@@ -124,9 +98,21 @@ public class OfflineRecognizer implements Recognizer {
         return outputImage;
     }
 
+    private float[] getFeaturesFrom(Bitmap bitmap) {
+        bitmap = resize(bitmap);
+        int[] pixels = getPixelValuesFrom(bitmap);
+        float[] floatValues = new float[pixels.length];
+        for (int i = 0; i < pixels.length - 1; ++i) {
+            final int pixel = pixels[i];
+            int b = pixel & 0xff;
+            floatValues[i] = (float)((0xff - b)/255.0);
+        }
+        return floatValues;
+    }
+
     private int[] getPixelValuesFrom(Bitmap bitmap) {
-        int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        int[] intValues = new int[config.getImageSize() * config.getImageSize()];
+        bitmap.getPixels(intValues, 0, config.getImageSize(), 0, 0, config.getImageSize(), config.getImageSize());
         return intValues;
     }
 
