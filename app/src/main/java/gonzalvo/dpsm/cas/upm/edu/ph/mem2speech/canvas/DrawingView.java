@@ -38,6 +38,8 @@ public class DrawingView extends View {
         this.paint.setStyle(Paint.Style.STROKE);
         this.paint.setStrokeJoin(Paint.Join.ROUND);
         this.paint.setStrokeWidth(5f);
+        this.setDrawingCacheEnabled(true);
+        this.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
     }
 
     @Override
@@ -112,6 +114,7 @@ public class DrawingView extends View {
         this.color_widthDTO.clear();
         this.paths.clear();
         this.path.reset();
+        this.destroyDrawingCache();
         invalidate();
     }
 
@@ -121,6 +124,7 @@ public class DrawingView extends View {
         } else {
             switchToPen();
         }
+        this.destroyDrawingCache();
     }
 
     private boolean penIsActive() {

@@ -2,6 +2,7 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.recognizer;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,25 +54,65 @@ public class OfflineRecognizer implements Recognizer {
         return json;
     }
 
+    private Bitmap resize(Bitmap image) {
+        int maxHeight = config.getImageSize();
+        int maxWidth = config.getImageSize();
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
+
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > ratioBitmap) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            if (finalWidth == maxWidth) {
+                image = padBottom(image, maxHeight);
+            } else {
+                image = padRight(image, maxWidth);
+            }
+            return image;
+        } else {
+            return image;
+        }
+    }
+
+    private Bitmap padRight(Bitmap bitmap, int maxWidth) {
+        Bitmap outputImage = Bitmap.createBitmap(maxWidth, bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputImage);
+        canvas.drawARGB(255, 255, 255, 255);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        return outputImage;
+    }
+
+    private Bitmap padBottom(Bitmap bitmap, int maxHeight) {
+        Bitmap outputImage = Bitmap.createBitmap(bitmap.getWidth(), maxHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputImage);
+        canvas.drawARGB(255, 255, 255, 255);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        return outputImage;
+    }
+
     private float[] getFeaturesFrom(Bitmap bitmap) {
-        bitmap = Bitmap.createScaledBitmap(
-                bitmap,
-                config.getImageSize(),
-                config.getImageSize(),
-                true
-        );
-        int[] intValues = getPixelValuesFrom(bitmap);
-        float[] floatValues = new float[bitmap.getWidth() * bitmap.getHeight()];
-        for (int i = 0; i < intValues.length; ++i) {
-            final int val = intValues[i];
-            floatValues[i] = (((val >> 16) & 0xFF));
+        bitmap = resize(bitmap);
+        int[] pixels = getPixelValuesFrom(bitmap);
+        float[] floatValues = new float[pixels.length];
+        for (int i = 0; i < pixels.length - 1; ++i) {
+            final int pixel = pixels[i];
+            int b = pixel & 0xff;
+            floatValues[i] = (float)((0xff - b)/255.0);
         }
         return floatValues;
     }
 
     private int[] getPixelValuesFrom(Bitmap bitmap) {
-        int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        int[] intValues = new int[config.getImageSize() * config.getImageSize()];
+        bitmap.getPixels(intValues, 0, config.getImageSize(), 0, 0, config.getImageSize(), config.getImageSize());
         return intValues;
     }
 
