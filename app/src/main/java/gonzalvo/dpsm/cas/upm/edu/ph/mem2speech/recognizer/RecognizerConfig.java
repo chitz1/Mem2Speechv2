@@ -21,7 +21,7 @@ public class RecognizerConfig {
         return imageWidth;
     }
 
-    public int getImageHeight() {
+    int getImageHeight() {
         return imageHeight;
     }
 
