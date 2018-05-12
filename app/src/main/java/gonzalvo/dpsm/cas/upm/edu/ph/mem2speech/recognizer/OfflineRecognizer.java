@@ -54,9 +54,7 @@ public class OfflineRecognizer implements Recognizer {
         return json;
     }
 
-    private Bitmap resize(Bitmap image) {
-        int maxHeight = config.getImageHeight();
-        int maxWidth = config.getImageWidth();
+    private Bitmap resize(Bitmap image, int maxHeight, int maxWidth) {
         if (maxHeight > 0 && maxWidth > 0) {
             int width = image.getWidth();
             int height = image.getHeight();
@@ -99,7 +97,9 @@ public class OfflineRecognizer implements Recognizer {
     }
 
     private float[] getFeaturesFrom(Bitmap bitmap) {
-        bitmap = resize(bitmap);
+        String imageConfigJsonString = loadJSONFrom(config.getImageConfigFile());
+        ImageConfig imageConfig = new ImageConfig(imageConfigJsonString);
+        bitmap = resize(bitmap, imageConfig.getImageHeight(), imageConfig.getImageWidth());
         int[] pixels = getPixelValuesFrom(bitmap);
         float[] floatValues = new float[pixels.length];
         for (int i = 0; i < pixels.length - 1; ++i) {
@@ -112,7 +112,7 @@ public class OfflineRecognizer implements Recognizer {
 
     private int[] getPixelValuesFrom(Bitmap bitmap) {
         int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getHeight(), bitmap.getWidth());
         return intValues;
     }
 
