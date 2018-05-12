@@ -3,12 +3,10 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.recognizer;
 public class RecognizerConfig {
     private final String[] charset;
     private final String servingModelConfigFile;
-    private final int imageWidth;
-    private final int imageHeight;
+    private final String imageConfigFile;
 
-    public RecognizerConfig(String[] charset, int imageWidth, int imageHeight, String servingModelConfigFile) {
-        this.imageWidth = imageWidth;
-        this.imageHeight = imageHeight;
+    public RecognizerConfig(String[] charset, String imageConfigFile, String servingModelConfigFile) {
+        this.imageConfigFile = imageConfigFile;
         this.charset = charset;
         this.servingModelConfigFile = servingModelConfigFile;
     }
@@ -17,12 +15,8 @@ public class RecognizerConfig {
         return charset;
     }
 
-    int getImageWidth() {
-        return imageWidth;
-    }
-
-    int getImageHeight() {
-        return imageHeight;
+    String getImageConfigFile() {
+        return imageConfigFile;
     }
 
     String getServingModelConfigFilename() {
