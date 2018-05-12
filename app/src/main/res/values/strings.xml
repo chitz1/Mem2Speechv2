@@ -4,4 +4,5 @@
     <string name="image_from_gallery_description">tap to recognize text from image from your gallery</string>
     <string name="settings_description">tap for settings</string>
     <string name="clear_canvas_description">tap to clear canvas</string>
+    <string name="recognize_description">Tap to recognize text on canvas</string>
 </resources>

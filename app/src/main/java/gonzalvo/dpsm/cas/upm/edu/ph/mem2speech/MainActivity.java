@@ -2,13 +2,18 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 
 import gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.canvas.DrawingView;
@@ -60,6 +65,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void recognize(View view){
         Bitmap bitmap = drawingView.getDrawingCache();
+        startToTextTask(bitmap);
+    }
+
+    public void selectImage(View view){
+        Intent selectImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(selectImageIntent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            Uri targetUri = data.getData();
+            Bitmap selectedImageBitmap;
+            try {
+                selectedImageBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                startToTextTask(selectedImageBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void startToTextTask(Bitmap bitmap) {
         new ToText(new WeakReferenceContextWrapper(new WeakReference<Context>(MainActivity.this))).execute(bitmap);
     }
 }
