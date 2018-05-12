@@ -43,7 +43,8 @@
         android:src="@drawable/ic_collections_black_24dp"
         app:backgroundTint="#FFFFFF"
         app:layout_anchorGravity="bottom|left|start"
-        android:contentDescription="@string/image_from_gallery_description" />
+        android:contentDescription="@string/image_from_gallery_description"
+        android:onClick="selectImage"/>
 
     <ImageView
         android:id="@+id/write"
@@ -66,6 +67,7 @@
         android:onClick="recognize"
         app:backgroundTint="#FFFFFF"
         app:layout_anchor="@+id/drawing"
-        app:layout_anchorGravity="bottom|center" />
+        app:layout_anchorGravity="bottom|center"
+        android:contentDescription="@string/recognize_description"/>
 
 </android.support.design.widget.CoordinatorLayout>
