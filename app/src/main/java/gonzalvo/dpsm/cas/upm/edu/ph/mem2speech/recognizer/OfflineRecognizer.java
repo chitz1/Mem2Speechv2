@@ -112,7 +112,7 @@ public class OfflineRecognizer implements Recognizer {
 
     private int[] getPixelValuesFrom(Bitmap bitmap) {
         int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getHeight(), bitmap.getWidth());
+        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
         return intValues;
     }
 
