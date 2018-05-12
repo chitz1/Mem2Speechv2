@@ -51,7 +51,7 @@ class ToText extends AsyncTask<Object, Void, Void> {
         String[] charset = readCharsetFromFile();
         RecognizerConfig config = new RecognizerConfig(
                 charset,
-                2048,
+                1024,
                 64,
                 "serving_model_config.json"
         );
