@@ -32,7 +32,8 @@
         android:src="@drawable/ic_settings_black_24dp"
         app:backgroundTint="#FFFFFF"
         app:layout_anchorGravity="top|right|end"
-        android:contentDescription="@string/settings_description" />
+        android:contentDescription="@string/settings_description"
+        android:onClick="viewSettings"/>
 
     <ImageView
         android:id="@+id/view_gallery"

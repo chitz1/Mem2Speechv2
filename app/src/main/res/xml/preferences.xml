@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.preference.ListPreference
+        android:key="model_preference"
+        android:title="@string/model_selection_title"
+        android:entries="@array/modelAlias"
+        android:entryValues="@array/Model"
+        android:summary="Select model to be used by the application"/>
+</PreferenceScreen>
