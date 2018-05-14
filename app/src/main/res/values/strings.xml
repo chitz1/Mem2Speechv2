@@ -5,4 +5,8 @@
     <string name="settings_description">tap for settings</string>
     <string name="clear_canvas_description">tap to clear canvas</string>
     <string name="recognize_description">Tap to recognize text on canvas</string>
+    <string name="model_selection_title">Active Model</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

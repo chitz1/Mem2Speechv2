@@ -3,20 +3,25 @@ package gonzalvo.dpsm.cas.upm.edu.ph.mem2speech;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 
 import gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.canvas.DrawingView;
+
+import static gonzalvo.dpsm.cas.upm.edu.ph.mem2speech.SettingsActivity.KEY_PREF_MODEL_LIST;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawingView = findViewById(R.id.drawing);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String modelPref = sharedPref.getString(KEY_PREF_MODEL_LIST, "-1");
+        Toast.makeText(this, modelPref, Toast.LENGTH_SHORT).show();
     }
 
     public void switchTool(View view){
@@ -71,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
     public void selectImage(View view){
         Intent selectImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(selectImageIntent, 0);
+    }
+
+    public void viewSettings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override
