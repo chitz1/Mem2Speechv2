@@ -25,8 +25,8 @@ public class OfflineRecognizer implements Recognizer {
     @Override
     public String recognizeHandwritingFrom(Bitmap bitmap) {
         float[] features = getFeaturesFrom(bitmap);
-        String jsonString = loadJSONFrom(config.getServingModelConfigFilename());
-        GraphComponents graphComponents = new GraphComponents(jsonString);
+        String servingModelConfig = loadJSONFrom(config.getServingModelConfigFilename());
+        GraphComponents graphComponents = new GraphComponents(servingModelConfig);
         InputNodes inputNodes = graphComponents.getInputNodes();
         InputNode inputNode = new InputNode(
                 "features",
