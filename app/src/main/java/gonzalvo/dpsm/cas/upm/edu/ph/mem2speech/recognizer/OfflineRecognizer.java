@@ -122,7 +122,7 @@ public class OfflineRecognizer implements Recognizer {
         for(int encodedCharacter : result){
             sb.append(charset[encodedCharacter]);
         }
-        return sb.toString();
+        return sb.toString().replaceAll("|", " ");
     }
 
 }
