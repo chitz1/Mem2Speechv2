@@ -35,6 +35,7 @@ public class OfflineRecognizer implements Recognizer {
         );
         OutputNodes outputNodes = graphComponents.getOutputNodes();
         List<int[]> outputs = inferenceInterface.runInference(new InputNode[]{inputNode}, outputNodes);
+        System.out.println(decode(outputs.get(0)));
         return decode(outputs.get(0));
     }
 
@@ -122,7 +123,7 @@ public class OfflineRecognizer implements Recognizer {
         for(int encodedCharacter : result){
             sb.append(charset[encodedCharacter]);
         }
-        return sb.toString().replaceAll("|", " ");
+        return sb.toString().replaceAll("\\|", " ");
     }
 
 }

@@ -5,5 +5,6 @@
         android:title="@string/model_selection_title"
         android:entries="@array/modelAlias"
         android:entryValues="@array/Model"
-        android:summary="Select model to be used by the application"/>
+        android:summary="Select model to be used by the application"
+        android:defaultValue="test_model"/>
 </PreferenceScreen>
