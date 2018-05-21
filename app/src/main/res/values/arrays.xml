@@ -4,10 +4,12 @@
         <item>test_model</item>
         <item>cnn_bilstm_ctc_model</item>
         <item>overfitting_model</item>
+        <item>three_layer_cnn_birnn_ctc_model</item>
     </string-array>
     <string-array name="modelAlias">
         <item>Test Model</item>
         <item>CNN BiLSTM CTC Model</item>
         <item>Overfitting Model</item>
+        <item>Three Layer CNN BiRNN CTC Model</item>
     </string-array>
 </resources>
